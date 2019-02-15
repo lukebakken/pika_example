@@ -6,19 +6,12 @@ from flask import Flask
 
 app = Flask('Pika Example')
 
-
-url = os.getenv('BROKER_URL')
-# url = 'amqp://localhost'
-
-
-broker = RabbitmqBroker(url=url)
+broker = RabbitmqBroker(url='amqp://localhost:5672')
 dramatiq.set_broker(broker)
-
 
 @dramatiq.actor
 def do_this_thing():
     pass
-
 
 @app.route('/')
 def schedule():
